@@ -45,11 +45,11 @@ A customizable animated checkbox component for React Native. No extra library re
 ## Install
 
 ```sh
-$ npm install --save react-native-animated-checkbox
+$ npm install --save react-native-checkbox-animated
 ```
 
 ```sh
-$ yarn add react-native-animated-checkbox
+$ yarn add react-native-checkbox-animated
 ```
 
 ## Usage
