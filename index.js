@@ -221,8 +221,8 @@ export default class CheckBox extends React.Component {
         useNativeDriver: Platform.OS === "android"
       })
     ]).start(() => {
-      rippleScale.setValue(0.01);
-      rippleOpacity.setValue(0.8);
+      this.rippleScale.setValue(0.01);
+      this.rippleOpacity.setValue(0.8);
     });
   };
 
