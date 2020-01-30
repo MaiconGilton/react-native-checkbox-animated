@@ -1,4 +1,4 @@
-declare module "react-native-animated-checkbox" {
+declare module "react-native-checkbox-animated" {
   import React, { Component } from "react";
   import { StyleProp, TextStyle, ViewStyle } from "react-native";
 
