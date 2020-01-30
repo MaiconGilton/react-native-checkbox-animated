@@ -210,19 +210,19 @@ export default class CheckBox extends React.Component {
     Animated.parallel([
       Animated.timing(this.rippleScale, {
         toValue: 1,
-        duration: 300,
+        duration: 150,
         easing: Easing.inOut(Easing.quad),
         useNativeDriver: Platform.OS === "android"
       }),
       Animated.timing(this.rippleOpacity, {
         toValue: 0,
-        duration: 450,
+        duration: 300,
         easing: Easing.inOut(Easing.quad),
         useNativeDriver: Platform.OS === "android"
       })
     ]).start(() => {
       this.rippleScale.setValue(0.01);
-      this.rippleOpacity.setValue(0.8);
+      this.rippleOpacity.setValue(0.1);
     });
   };
 
