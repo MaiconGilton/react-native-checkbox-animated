@@ -116,7 +116,7 @@ export default class CheckBox extends React.Component {
         activeOpacity={touchableLabel ? 0.7 : 1}
         style={[{ justifyContent: "center", flex: 1 }, labelContainerStyle]}
       >
-        <Text style={[{ padding: 10 }, labelStyle]}>{label}</Text>
+        {React.isValidElement(label) ? label : <Text style={[{ padding: 10 }, labelStyle]}>{label}</Text>}
       </TouchableOpacity>
     );
   };

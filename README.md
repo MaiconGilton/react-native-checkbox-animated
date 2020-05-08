@@ -95,9 +95,9 @@ Checkout examples.js for the above examples.
   </tr>
   <tr>
     <td><code>label</code></td>
-    <td>Text that follows the checkbox</td>
+    <td>Text or React Component that follows the checkbox</td>
     <td>false</td>
-    <td>string</td>
+    <td>string / React Component</td>
     <td>Your label here</td>
   </tr>
   <tr>

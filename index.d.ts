@@ -21,7 +21,7 @@ declare module "react-native-checkbox-animated" {
     /**
      *  Text that follows the checkbox.
      */
-    label?: string;
+    label?: string | React.ReactNode;
 
     /**
      *  Specify if checkbox will behave as in a group.
