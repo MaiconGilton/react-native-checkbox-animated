@@ -184,7 +184,7 @@ export default class CheckBox extends React.Component {
                   animate,
                   checkStyle
                 ]}
-              >✓</Animated.Text>
+              >{checked && '✓'}</Animated.Text>
             )}
 
           {animationType === "reveal" ? (
