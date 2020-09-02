@@ -41,7 +41,7 @@ $ yarn add react-native-checkbox-animated
 ```js
 // ... Imports
 import React, { useState } from "react";
-import Checkbox from "react-native-animated-checkbox";
+import Checkbox from "react-native-checkbox-animated";
 
 const App = () => {
   const [checked, setChecked] = useState(false);
