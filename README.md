@@ -108,13 +108,6 @@ Checkout examples.js for the above examples.
     <td>true</td>
   </tr>
   <tr>
-    <td><code>group</code></td>
-    <td>Specify if checkbox will behave as in a group</td>
-    <td>false</td>
-    <td>boolean</td>
-    <td>false</td>
-  </tr>
-  <tr>
     <td><code>checkedBackgroundColor</code></td>
     <td>Specify the color of checkbox's background when it's checked</td>
     <td>false</td>

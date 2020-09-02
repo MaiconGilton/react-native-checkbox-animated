@@ -1,30 +1,30 @@
 {
-  "name": "react-native-checkbox-animated",
-  "version": "0.0.4",
-  "description": "A customizable animated checkbox component for React Native",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/MaiconGilton/react-native-checkbox-animated.git"
-  },
-  "keywords": [
-    "checkbox",
-    "customizable",
-    "animated",
-    "react-native",
-    "check",
-    "select",
-    "option",
-    "component",
-    "react-native-animated-checkbox"
-  ],
-  "author": "Maicon Gilton",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/MaiconGilton/react-native-checkbox-animated/issues"
-  },
-  "homepage": "https://github.com/MaiconGilton/react-native-checkbox-animated#readme"
+    "name": "react-native-checkbox-animated",
+    "version": "0.0.5",
+    "description": "A customizable animated checkbox component for React Native",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/MaiconGilton/react-native-checkbox-animated.git"
+    },
+    "keywords": [
+        "checkbox",
+        "customizable",
+        "animated",
+        "react-native",
+        "check",
+        "select",
+        "option",
+        "component",
+        "react-native-animated-checkbox"
+    ],
+    "author": "Maicon Gilton",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/MaiconGilton/react-native-checkbox-animated/issues"
+    },
+    "homepage": "https://github.com/MaiconGilton/react-native-checkbox-animated#readme"
 }
