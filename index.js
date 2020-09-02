@@ -26,9 +26,9 @@ export default class CheckBox extends React.Component {
     componentDidUpdate(prevProps, prevState) {
         const { animationType, onValueChange, checked } = this.props;
         if (prevProps.checked !== checked) {
-            if (animationType === "scale") this.animateScale(checked);
-            else if (animationType === "left") this.animateLeft(checked);
-            else this.animateReveal(checked);
+            if (animationType === "scale") this.animateScale(!checked);
+            else if (animationType === "left") this.animateLeft(!checked);
+            else this.animateReveal(!checked);
         }
     }
 
