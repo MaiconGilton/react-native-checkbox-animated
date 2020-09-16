@@ -9,28 +9,40 @@ import {
 } from "react-native";
 
 export default class CheckBox extends React.Component {
-    constructor(props) {
-        super(props)
-
-        this.animationScale = new Animated.Value(props.checked ? 1 : 0);
-        this.animationLeft = new Animated.Value(
-            props.checked ? 0 : -props.size
-        );
-        this.animationReveal = new Animated.Value(
-            props.checked ? props.size : 0
-        );
-        this.rippleScale = new Animated.Value(0.01);
-        this.rippleOpacity = new Animated.Value(0.1);
-    }
+    state = { checked: this.props.checked }
+    animationScale = new Animated.Value(this.props.checked ? 1 : 0);
+    animationLeft = new Animated.Value(
+        this.state.checked ? 0 : -this.props.size
+    );
+    animationReveal = new Animated.Value(
+        this.state.checked ? this.props.size : 0
+    );
+    rippleScale = new Animated.Value(0.01);
+    rippleOpacity = new Animated.Value(0.1);
 
     componentDidUpdate(prevProps, prevState) {
-        const { animationType, onValueChange, checked } = this.props;
-        if (prevProps.checked !== checked) {
-            if (animationType === "scale") this.animateScale(!checked);
-            else if (animationType === "left") this.animateLeft(!checked);
-            else this.animateReveal(!checked);
+        const { animationType, group, checked } = this.props;
+
+        if (group && !this.state.checked) {
+            if (animationType === "scale") this.animateScale(true);
+            else if (animationType === "left") this.animateLeft(true);
+            else this.animateReveal(true);
         }
+
+        if (checked !== prevProps.checked) this.setState({ checked })
     }
+
+    _onValueChange = () => {
+        const { onValueChange, animationType, group } = this.props;
+
+        if (group && this.state.checked) return;
+
+        onValueChange(!this.state.checked);
+
+        if (animationType === "scale") this.animateScale(this.state.checked);
+        else if (animationType === "left") this.animateLeft(this.state.checked);
+        else this.animateReveal(this.state.checked);
+    };
 
     animateScale = (checked) => {
         if (checked)
@@ -88,6 +100,124 @@ export default class CheckBox extends React.Component {
             }).start();
     };
 
+    _renderTextBtn = (position) => {
+        const {
+            label,
+            touchableLabel,
+            checkPosition,
+            labelStyle,
+            rippleEffect,
+            labelContainerStyle
+        } = this.props;
+
+        if (!label || position !== checkPosition) return null;
+
+        return (
+            <TouchableOpacity
+                onPressIn={rippleEffect && touchableLabel ? this.onPressedIn : () => { }}
+                onPress={() => {
+                    if (touchableLabel) {
+                        this.setState({ checked: !this.state.checked })
+                        this._onValueChange(!this.state.checked)
+                    }
+                }}
+                activeOpacity={touchableLabel ? 0.7 : 1}
+                style={[{ justifyContent: "center", flex: 1 }, labelContainerStyle]}
+            >
+                {React.isValidElement(label) ? label : <Text style={[{ padding: 10 }, labelStyle]}>{label}</Text>}
+            </TouchableOpacity>
+        );
+    };
+
+    _renderCheckBtn = () => {
+        const {
+            size,
+            checkedBackgroundColor,
+            unCheckedBackgroundColor,
+            unCheckedBorderColor,
+            checkedBorderColor,
+            borderWidth,
+            rounded,
+            checkBoxRadius,
+            checkMarkSize,
+            checkMarkColor,
+            animationType,
+            checkStyle,
+            checkboxContainerStyle,
+            boxStyle,
+            customMarker,
+        } = this.props;
+
+        const { checked } = this.state
+
+        var animate = {};
+        if (animationType === "scale")
+            animate = { transform: [{ scale: this.animationScale }] };
+        else if (animationType === "left")
+            animate = { transform: [{ translateX: this.animationLeft }] };
+
+        return (
+            <TouchableOpacity
+                onPress={() => {
+                    this.setState({ checked: !this.state.checked })
+                    this._onValueChange(!this.state.checked)
+                }}
+                activeOpacity={0.7}
+                style={[{ padding: 10 }, checkboxContainerStyle]}
+            >
+                <Animated.View
+                    style={[
+                        {
+                            width: size,
+                            height: size,
+                            borderRadius: rounded ? size : checkBoxRadius || size * 0.2,
+                            borderWidth: borderWidth,
+                            borderColor: checked ? checkedBorderColor : unCheckedBorderColor,
+                            justifyContent: "center",
+                            alignItems: "center",
+                            overflow: "hidden",
+                            backgroundColor: checked
+                                ? checkedBackgroundColor
+                                : unCheckedBackgroundColor
+                        },
+                        boxStyle
+                    ]}
+                >
+                    {customMarker ? (
+                        <Animated.View style={animate}>{customMarker}</Animated.View>
+                    ) : (
+                            <Animated.Text
+                                style={[
+                                    {
+                                        fontSize: checkMarkSize,
+                                        lineHeight: size,
+                                        color: checkMarkColor
+                                    },
+                                    animate,
+                                    checkStyle
+                                ]}
+                            >✓</Animated.Text>
+                        )}
+
+                    {animationType === "reveal" ? (
+                        <Animated.View
+                            style={{
+                                position: "absolute",
+                                width: size,
+                                aspectRatio: 1 / 1,
+                                borderRadius: rounded ? size : size * 0.05,
+                                backgroundColor: checked
+                                    ? checkedBackgroundColor
+                                    : unCheckedBackgroundColor,
+                                transform: [{ translateX: this.animationReveal }]
+                            }}
+                        />
+                    ) : null}
+                </Animated.View>
+            </TouchableOpacity>
+        );
+    };
+
     onPressedIn = () => {
         Animated.parallel([
             Animated.timing(this.rippleScale, {
@@ -106,124 +236,6 @@ export default class CheckBox extends React.Component {
             this.rippleScale.setValue(0.01);
             this.rippleOpacity.setValue(0.1);
         });
-    };
-
-    _renderTextBtn = (position) => {
-        const {
-            label,
-            touchableLabel,
-            checkPosition,
-            labelStyle,
-            rippleEffect,
-            labelContainerStyle,
-            checked,
-            onValueChange
-        } = this.props;
-
-        if (!label || position !== checkPosition) return null;
-
-        return (
-            <TouchableOpacity
-                onPressIn={rippleEffect && touchableLabel && this.onPressedIn}
-                onPress={() => touchableLabel && onValueChange(!checked)}
-                activeOpacity={touchableLabel ? 0.7 : 1}
-                style={[{ justifyContent: "center", flex: 1 }, labelContainerStyle]}
-            >
-                {
-                    React.isValidElement(label)
-                        ? label
-                        : <Text style={[{ padding: 10 }, labelStyle]}>{label}</Text>
-                }
-            </TouchableOpacity>
-        );
-    };
-
-    _renderCheckBtn = () => {
-        const {
-            checked,
-            size,
-            checkedBackgroundColor,
-            unCheckedBackgroundColor,
-            unCheckedBorderColor,
-            checkedBorderColor,
-            borderWidth,
-            rounded,
-            checkBoxRadius,
-            checkMarkSize,
-            checkMarkColor,
-            animationType,
-            checkStyle,
-            checkboxContainerStyle,
-            boxStyle,
-            customMarker,
-            onValueChange
-        } = this.props;
-
-        var animate = {};
-        if (animationType === "scale")
-            animate = { transform: [{ scale: this.animationScale }] };
-        else if (animationType === "left")
-            animate = { transform: [{ translateX: this.animationLeft }] };
-
-        return (
-            <TouchableOpacity
-                onPress={() => onValueChange(!checked)}
-                activeOpacity={0.7}
-                style={[{ padding: 10 }, checkboxContainerStyle]}
-            >
-                <View
-                    style={[
-                        {
-                            width: size,
-                            height: size,
-                            borderRadius: rounded ? size : checkBoxRadius || size * 0.2,
-                            borderWidth: borderWidth,
-                            borderColor: checked ? checkedBorderColor : unCheckedBorderColor,
-                            justifyContent: "center",
-                            alignItems: "center",
-                            overflow: "hidden",
-                            backgroundColor: checked
-                                ? checkedBackgroundColor
-                                : unCheckedBackgroundColor
-                        },
-                        boxStyle
-                    ]}
-                >
-                    {
-                        customMarker ?
-                            <Animated.View style={animate}>{customMarker}</Animated.View>
-                            :
-                            <Animated.Text
-                                style={[
-                                    {
-                                        fontSize: checkMarkSize,
-                                        lineHeight: size,
-                                        color: checkMarkColor
-                                    },
-                                    checkStyle,
-                                    animate,
-                                ]}
-                            >✓</Animated.Text>
-                    }
-
-                    {
-                        animationType === "reveal" &&
-                        <Animated.View
-                            style={{
-                                position: "absolute",
-                                width: size,
-                                aspectRatio: 1 / 1,
-                                borderRadius: rounded ? size : size * 0.05,
-                                backgroundColor: checked
-                                    ? checkedBackgroundColor
-                                    : unCheckedBackgroundColor,
-                                transform: [{ translateX: this.animationReveal }]
-                            }}
-                        />
-                    }
-                </View>
-            </TouchableOpacity>
-        );
     };
 
     _renderRipple() {
