@@ -1,10 +1,11 @@
 {
     "name": "react-native-checkbox-animated",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "description": "A customizable animated checkbox component for React Native",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "release": "standard-version"
     },
     "repository": {
         "type": "git",
