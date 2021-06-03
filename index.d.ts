@@ -11,12 +11,12 @@ declare module "react-native-checkbox-animated" {
         /**
          *  Callback that gets called when checkbox is pressed.
          */
-        onValueChange: (val: boolean) => boolean;
+        onValueChange: (val: boolean) => void;
 
         /**
          *  Specify the size of the checkBox. Default = 20
          */
-        size: number;
+        size?: number;
 
         /**
          *  Text that follows the checkbox.
@@ -26,57 +26,57 @@ declare module "react-native-checkbox-animated" {
         /**
          *  Specify if state of checkbox changes when label is pressed. Default = true
          */
-        touchableLabel: boolean;
+        touchableLabel?: boolean;
 
         /**
          *  Specify if label has ripple effect on press when touchableLabel is set to true. Default = true
          */
-        rippleEffect: boolean;
+        rippleEffect?: boolean;
 
         /**
          *  Specify the color of ripple effect when it is set to true. Default = black
          */
-        rippleColor: string;
+        rippleColor?: string;
 
         /**
          *  Specify the color of checkbox's background when it's checked. Default = #22cdf0
          */
-        checkedBackgroundColor: string;
+        checkedBackgroundColor?: string;
 
         /**
          *  Specify the color of checkbox's background when it's not checked. Default = white
          */
-        unCheckedBackgroundColor: string;
+        unCheckedBackgroundColor?: string;
 
         /**
          *  Specify the color of checkbox's border when it's checked. Default = grey
          */
-        checkedBorderColor: string;
+        checkedBorderColor?: string;
 
         /**
          *  Specify the color of checkbox's border when it's not checked. Default = transparent
          */
-        unCheckedBorderColor: string;
+        unCheckedBorderColor?: string;
 
         /**
          *  border width of checkbox. Default = 1
          */
-        borderWidth: boolean;
+        borderWidth?: boolean;
 
         /**
          *  Specify the position where the checkbox will be rendered. Default = left
          */
-        checkPosition: "left" | "right";
+        checkPosition?: "left" | "right";
 
         /**
          *  Set the shape of the checkbox to be rounded instead of a square. Default = false
          */
-        rounded: boolean;
+        rounded?: boolean;
 
         /**
          *  Set radius of the checkbox. Default = 20% of size
          */
-        checkBoxRadius: number;
+        checkBoxRadius?: number;
 
         /**
          *  Specify the size of the checkbox. Default = 15
@@ -87,17 +87,17 @@ declare module "react-native-checkbox-animated" {
          *  Specify the color of the checkmark. Default = black
          *  Important: checkmark 1 has a fixed grey color, you cannot change it.
          */
-        checkMarkColor: string;
+        checkMarkColor?: string;
 
         /**
          *  Specify the custom animation type. Default = scale
          */
-        animationType: "scale" | "left" | "reveal";
+        animationType?: "scale" | "left" | "reveal";
 
         /**
          *  Text styles props applied to the checkmark character.
          */
-        checkStyle: StyleProp<TextStyle>;
+        checkStyle?: StyleProp<TextStyle>;
 
         /**
          *  Text styles props applied to your label.
