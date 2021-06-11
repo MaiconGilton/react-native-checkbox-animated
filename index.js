@@ -21,21 +21,17 @@ export default class CheckBox extends React.Component {
     rippleOpacity = new Animated.Value(0.1);
 
     componentDidUpdate(prevProps, prevState) {
-        const { animationType, group, checked } = this.props;
+        const { animationType, checked } = this.props;
 
-        if (group && !this.state.checked) {
-            if (animationType === "scale") this.animateScale(true);
-            else if (animationType === "left") this.animateLeft(true);
-            else this.animateReveal(true);
-        }
+        if (animationType === "scale") this.animateScale(!checked);
+        else if (animationType === "left") this.animateLeft(!checked);
+        else this.animateReveal(!checked);
 
         if (checked !== prevProps.checked) this.setState({ checked })
     }
 
     _onValueChange = () => {
-        const { onValueChange, animationType, group } = this.props;
-
-        if (group && this.state.checked) return;
+        const { onValueChange, animationType } = this.props;
 
         onValueChange(!this.state.checked);
 
@@ -186,18 +182,18 @@ export default class CheckBox extends React.Component {
                     {customMarker ? (
                         <Animated.View style={animate}>{customMarker}</Animated.View>
                     ) : (
-                            <Animated.Text
-                                style={[
-                                    {
-                                        fontSize: checkMarkSize,
-                                        lineHeight: size,
-                                        color: checkMarkColor
-                                    },
-                                    animate,
-                                    checkStyle
-                                ]}
-                            >✓</Animated.Text>
-                        )}
+                        <Animated.Text
+                            style={[
+                                {
+                                    fontSize: checkMarkSize,
+                                    lineHeight: size,
+                                    color: checkMarkColor
+                                },
+                                animate,
+                                checkStyle
+                            ]}
+                        >✓</Animated.Text>
+                    )}
 
                     {animationType === "reveal" ? (
                         <Animated.View

@@ -74,11 +74,6 @@ declare module "react-native-checkbox-animated" {
         rounded?: boolean;
 
         /**
-         *  Set logic for select one option from multiple options. Default = false
-         */
-        group?: boolean;
-
-        /**
          *  Set radius of the checkbox. Default = 20% of size
          */
         checkBoxRadius?: number;
