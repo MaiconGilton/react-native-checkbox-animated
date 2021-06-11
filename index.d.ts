@@ -6,12 +6,12 @@ declare module "react-native-checkbox-animated" {
         /**
          *  Current state of the checkBox. Default = false.
          */
-        checked: boolean;
+        checked?: boolean;
 
         /**
          *  Callback that gets called when checkbox is pressed.
          */
-        onValueChange: (val: boolean) => void;
+        onValueChange: (val: boolean) => boolean;
 
         /**
          *  Specify the size of the checkBox. Default = 20
@@ -21,7 +21,7 @@ declare module "react-native-checkbox-animated" {
         /**
          *  Text that follows the checkbox.
          */
-        label?: string | React.ReactNode;
+        label: string | React.ReactNode;
 
         /**
          *  Specify if state of checkbox changes when label is pressed. Default = true
@@ -74,6 +74,11 @@ declare module "react-native-checkbox-animated" {
         rounded?: boolean;
 
         /**
+         *  Set logic for select one option from multiple options. Default = false
+         */
+        group?: boolean;
+
+        /**
          *  Set radius of the checkbox. Default = 20% of size
          */
         checkBoxRadius?: number;
@@ -81,7 +86,7 @@ declare module "react-native-checkbox-animated" {
         /**
          *  Specify the size of the checkbox. Default = 15
          */
-        checkMarkSize: number;
+        checkMarkSize?: number;
 
         /**
          *  Specify the color of the checkmark. Default = black
