@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.10](https://github.com/MaiconGilton/react-native-checkbox-animated/compare/v0.0.9...v0.0.10) (2021-06-11)
+
+
+### Bug Fixes
+
+* remove group property ([6a15964](https://github.com/MaiconGilton/react-native-checkbox-animated/commit/6a15964a8b99f49cfd97f38ae6e3659ed9375002))
+
 ### [0.0.9](https://github.com/MaiconGilton/react-native-checkbox-animated/compare/v0.0.8...v0.0.9) (2021-06-11)
 
 
